@@ -14,5 +14,5 @@ message ContractDeleteTransactionBody {
 		AccountID  transferAccountID=2; // The account ID which will receive all remaining hbars
 	    ContractID  transferContractID=3; // The contract ID which will receive all remaining hbars
     }
-	
+
 }

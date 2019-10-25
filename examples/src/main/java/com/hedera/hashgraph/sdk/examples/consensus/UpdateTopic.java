@@ -24,8 +24,7 @@ public final class UpdateTopic {
 
         new UpdateTopicTransaction(client)
             .setAdminKey(adminKey)
-            .setCreationTime(Instant.now().minus(1, ChronoUnit.HOURS))
-            .setExpirationDuration(Duration.ofHours(2))
+            .setValidStartTime(Instant.now().minus(1, ChronoUnit.HOURS))
             .setSubmitKey(submitKey)
             .setTopicId(topicId)
             .setTopicMemo("test2")

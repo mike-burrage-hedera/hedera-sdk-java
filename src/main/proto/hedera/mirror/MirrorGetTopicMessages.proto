@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package hedera.mirror;
+
+option go_package = "github.com/hashgraph/mirror/api/proto";
+option java_package = "com.hedera.mirror.api.proto.java";
+
+import "BasicTypes.proto";
+import "Timestamp.proto";
+import "hedera/mirror/MirrorQueryOptions.proto";
+
+// See [MirrorService.getTopicMessages()](#hedera.mirror.MirrorService)
+message MirrorGetTopicMessagesQuery {
+    MirrorQueryOptions queryOptions = 1; // Common query options to filter the transactions. If not set it will return all transactions.
+    .proto.TopicID topicID = 2; // A required topic ID to retrieve messages for.
+}
+
+message MirrorGetTopicMessagesResponse {
+    .proto.Timestamp consensusTimestamp = 1; // The time at which the transaction reach consensus
+    bytes message = 2; // The message body originally in the ConsensusSubmitMessageTransactionBody
+    uint64 sequenceNumber = 3;
+}

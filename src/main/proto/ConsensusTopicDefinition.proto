@@ -14,10 +14,18 @@ message ConsensusTopicDefinition {
     // When the topic should become available to receive messages via ConsensusService.submitMessage().
     // The topic will not accept submitMessage() requests _before_ this timestamp.
     // If unspecified, no creation timestamp is used.
-    Timestamp creationTime = 2;
+    Timestamp validStartTime = 2;
     // When the topic should cease availability to receive messages via ConsensusService.submitMessage().
     // The topic will not accept submitMessage() requests from this timestamp forward.
-    Timestamp expirationTime = 3; // When the topic should cease accepting transactions.
-    Key adminKey = 4; // Who can change/delete this topic. Defaults to requester if unspecified on create.
-    Key submitKey = 5; // Who can submitMessage (empty means anyone can). Defaults to allowing anyone to submit.
+    Timestamp expirationTime = 3;
+    /* Access control for update/delete of the topic.
+     * If unspecified, no access control is performed to extend the expirationTime of the topic via
+     * ConsensusService.updateTopic, but that is the only update allowed and ConsensusService.deleteTopic is
+     * not allowed.
+     */
+    Key adminKey = 4;
+    /* Access control for ConsensusService.submitMessage.
+     * If unspecified, no access control is performed on ConsensusService.submitMessage (all submissions are allowed).
+     */
+    Key submitKey = 5;
 }

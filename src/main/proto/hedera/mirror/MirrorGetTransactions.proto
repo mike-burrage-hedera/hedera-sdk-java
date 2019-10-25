@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package hedera.mirror;
+
+option go_package = "github.com/hashgraph/mirror/api/proto";
+option java_package = "com.hedera.mirror.api.proto.java";
+
+import "BasicTypes.proto";
+import "hedera/mirror/MirrorQueryOptions.proto";
+import "QueryHeader.proto";
+import "Transaction.proto";
+import "TransactionRecord.proto";
+
+// See [MirrorService.getTransactions()](#hedera.mirror.MirrorService)
+message MirrorGetTransactionsQuery {
+    .proto.QueryHeader queryHeader = 1; // TODO: Do we need this or can we just use ResponseType since there's no payment? Or will there be payment if state proof?
+    MirrorQueryOptions queryOptions = 2; // Common query options to filter transactions. If not set it will return all transactions.
+    .proto.TopicID topicID = 3; // An optional topic ID to filter transactions.
+    repeated .proto.HederaFunctionality transactionType = 4; // A list of transaction types to filter transactions. If not set it will return transactions of all types.
+}
+
+message MirrorGetTransactionsResponse {
+    .proto.Transaction transaction = 1; // A single signed transaction, including all its signatures
+    .proto.TransactionRecord transactionRecord = 2; // The transaction record associated with the transaction
+}

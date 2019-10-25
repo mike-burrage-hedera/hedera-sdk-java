@@ -39,13 +39,8 @@ public final class UpdateTopicTransaction extends TransactionBuilder<UpdateTopic
         return this;
     }
 
-    public UpdateTopicTransaction setCreationTime(Instant creationTime) {
-        builder.setCreationTime(TimestampHelper.timestampFrom(creationTime));
-        return this;
-    }
-
-    public UpdateTopicTransaction setExpirationDuration(Duration expirationDuration) {
-        builder.setExpirationDuration(DurationHelper.durationFrom(expirationDuration));
+    public UpdateTopicTransaction setValidStartTime(Instant creationTime) {
+        builder.setValidStartTime(TimestampHelper.timestampFrom(creationTime));
         return this;
     }
 

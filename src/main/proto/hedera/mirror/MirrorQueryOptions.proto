@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package hedera.mirror;
+
+option go_package = "github.com/hashgraph/mirror/api/proto";
+option java_package = "com.hedera.mirror.api.proto.java";
+
+import "Timestamp.proto";
+
+// Common query options to filter transactions.
+message MirrorQueryOptions {
+    .proto.Timestamp startTime = 1; // Include transactions which reached consensus on or after this time. Defaults to current time if not set.
+    .proto.Timestamp endTime = 2; // Include transactions which reached consensus before this time. If not set it will receive indefinitely.
+    uint32 limit = 3; // The maximum number of transactions to receive before stopping. If not set or set to zero it will return transactions indefinitely.
+}

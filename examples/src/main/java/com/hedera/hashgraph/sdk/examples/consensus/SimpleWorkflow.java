@@ -34,8 +34,7 @@ public final class SimpleWorkflow {
 
         new UpdateTopicTransaction(client)
             .setAdminKey(newKey.getPublicKey())
-            .setCreationTime(Instant.now().minus(1, ChronoUnit.HOURS))
-            .setExpirationDuration(Duration.ofHours(2))
+            .setValidStartTime(Instant.now().minus(1, ChronoUnit.HOURS))
             .setSubmitKey(newKey.getPublicKey())
             .setTopicId(topicId)
             .setTopicMemo("test2")

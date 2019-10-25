@@ -125,23 +125,35 @@ enum ResponseCodeEnum {
   NOT_SPECIAL_ACCOUNT = 94; //The payer account is not a special account(account 0.0.55)
   CONTRACT_NEGATIVE_GAS = 95; // Negative gas was offered in smart contract call
   CONTRACT_NEGATIVE_VALUE = 96; // Negative value / initial balance was specified in a smart contract call / create
-  INVALID_TOPIC_ID = 97; // The Topic ID specified is not in the system.
+  INVALID_FEE_FILE=97; // Failed to update fee file
+  INVALID_EXCHANGE_RATE_FILE=98; // Failed to update exchange rate file
+  INSUFFICIENT_LOCAL_CALL_GAS = 99; // Payment tendered for contract local call cannot cover both the fee and the gas
+  ENTITY_NOT_ALLOWED_TO_DELETE = 100; // Entities with Entity ID below 1000 are not allowed to be deleted
+  AUTHORIZATION_FAILED = 101; // Violating one of these rules: 1) treasury account can update all entities below 0.0.1000, 2) account 0.0.50 can update all entities from 0.0.51 - 0.0.80, 3) Network Function Master Account A/c 0.0.50 - Update all Network Function accounts & perform all the Network Functions listed below, 4) Network Function Accounts: i) A/c 0.0.55 - Update Address Book files (0.0.101/102), ii) A/c 0.0.56 - Update Fee schedule (0.0.111), iii) A/c 0.0.57 - Update Exchange Rate (0.0.112).
+  FILE_UPLOADED_PROTO_INVALID = 102; // Fee Schedule Proto uploaded but not valid (append or update is required)
+  FILE_UPLOADED_PROTO_NOT_SAVED_TO_DISK = 103; // Fee Schedule Proto uploaded but not valid (append or update is required)
+  FEE_SCHEDULE_FILE_PART_UPLOADED = 104; // Fee Schedule Proto File Part uploaded
+  EXCHANGE_RATE_CHANGE_LIMIT_EXCEEDED = 105; // The change on Exchange Rate exceeds Exchange_Rate_Allowed_Percentage
+  MAX_CONTRACT_STORAGE_EXCEEDED = 106;  // Contract permanent storage exceeded the currently allowable limit
+  TRANSAFER_ACCOUNT_SAME_AS_DELETE_ACCOUNT = 107; // Transfer Account should not be same as Account to be deleted
+  TOTAL_LEDGER_BALANCE_INVALID = 108;
+  EXPIRATION_REDUCTION_NOT_ALLOWED = 110; // The expiration date/time on a smart contract may not be reduced
+
+  /* HCS release below this point */
+  INVALID_TOPIC_ID = 150; // The Topic ID specified is not in the system.
   // The Topic referenced is in a deleted state for a period of time pending removal from the system.
   // No ConsensusService transactions on this topic will succeed once the topic is deleted, though getTopicInfo()
   // may return the topic's state.
-  TOPIC_DELETED = 98;
-  MESSAGE_TOO_LONG = 99;
+  TOPIC_DELETED = 151;
+  MESSAGE_TOO_LONG = 152;
   // An attempted ConsensusService.submitMessage failed due to being called outside the valid time period for the
   // topic, defined by the topic's creationTimestamp and expirationTimestamp. All other operations on the topic
   // will succeed.
-  TOPIC_NOT_ENABLED = 100;
-  INVALID_TOPIC_CREATION_TIME = 101;
-  INVALID_TOPIC_EXPIRATION_TIME = 102;
-  INVALID_TOPIC_ADMIN_KEY = 103;
-  INVALID_TOPIC_SUBMIT_KEY = 104;
-  UNAUTHORIZED = 105; // An attempted ConsensusService operation failed due to missing/insufficient keys.
-  INVALID_TOPIC_MESSAGE = 106; // A ConsensusService message is empty.
-  INVALID_CREATE_TOPIC_ID = 107; // Realm/shard for ConsensusService.createTopic do not match payer.
-  // Realm/shard of a contract ID in adminKey or submitKey for a ConsensusService topic doesn't match the shard/realm of the topic.
-  INVALID_TOPIC_CONTRACT_ID = 108;
+  TOPIC_NOT_ENABLED = 153;
+  INVALID_TOPIC_VALID_START_TIME = 154;
+  INVALID_TOPIC_EXPIRATION_TIME = 155;
+  INVALID_TOPIC_ADMIN_KEY = 156;
+  INVALID_TOPIC_SUBMIT_KEY = 157;
+  UNAUTHORIZED = 158; // An attempted ConsensusService operation failed due to missing/insufficient signatures.
+  INVALID_TOPIC_MESSAGE = 159; // A ConsensusService message is empty.
 }

@@ -17,22 +17,28 @@ message ConsensusUpdateTopicTransactionBody {
     // Short publicly visible memo about the topic. No guarantee of uniqueness. Null for "do not update".
     google.protobuf.StringValue memo = 2;
 
-    // Effective timestamp at which submitMessage calls will begin to succeed on the topic.
-    // If unspecified, the consensus timestamp of this topic will remain unchanged.
-    Timestamp creationTime = 3;
+    /* Effective timestamp at which submitMessage calls will begin to succeed on the topic.
+     * If unspecified, the validStartTime of this topic will remain unchanged.
+     */
+    Timestamp validStartTime = 3;
 
-    // Effective timestamp at which submitMessage calls will no longer succeed on the topic.
-    // If unspecified, the expirationTime of the topic will remain unchanged.
-    // If specified, the topic's lifetime may not be extended past MAX_LIFETIME_SECONDS
-    // from now.
-    oneof expiration {
-        Timestamp expirationTime = 4;
-        Duration expirationDuration = 5; // Duration to increment the topic's expirationTime.
-    }
+    /* Effective timestamp at which submitMessage calls will no longer succeed on the topic.
+     * If unspecified, the expirationTime of the topic will remain unchanged.
+     * If specified, the topic's lifetime may not be extended past MAX_LIFETIME_SECONDS from now (internal system config)
+     */
+    Timestamp expirationTime = 4;
 
-    Key adminKey = 6; // Who can change/delete this topic. If unspecified, no update will be made.
+    /* Access control for update/delete of the topic.
+     * If unspecified, no change.
+     * If empty key - no access control is performed to extend the expirationTime of the topic via
+     * ConsensusService.updateTopic, but that is the only update allowed and ConsensusService.deleteTopic is
+     * not allowed.
+     */
+    Key adminKey = 6;
 
-    // Who can submitMessage (empty means anyone can). If unspecified, no update will be made.
-    // To _remove_ the current submitKey, specify an empty KeyList.
+    /* Access control for ConsensusService.submitMessage.
+     * If unspecified, no change.
+     * If empty key - no access control is performed on ConsensusService.submitMessage (all submissions are allowed).
+     */
     Key submitKey = 7;
 }

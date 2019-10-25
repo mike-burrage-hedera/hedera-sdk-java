@@ -18,14 +18,11 @@ public final class CreateTopic {
     public static void main(String[] args) throws HederaException {
         var client = ExampleHelper.createHederaClient();
         var adminKey = Key.fromString(Ed25519PrivateKey.generate().getPublicKey().toString());
-        var submitKey = Key.fromString(Ed25519PrivateKey.generate().getPublicKey().toString());
 
         var record = new CreateTopicTransaction(client)
             .setAdminKey(adminKey)
-            .setCreationTime(Instant.now().minus(1, ChronoUnit.HOURS))
-            .setExpirationDuration(Duration.ofHours(2))
-            .setSubmitKey(submitKey)
-            .setTopicMemo("test")
+            .setValidStartTime(Instant.now().minus(1, ChronoUnit.HOURS))
+            .setTopicMemo("TEST TOPIC")
             .executeForRecord();
 
         System.out.println("Topic created: " + record.getReceipt().getTopicId());

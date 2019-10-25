@@ -25,6 +25,6 @@ message ConsensusGetTopicInfoResponse {
     ResponseHeader header = 1;
 
     TopicID topicID = 2; // Topic identifier.
-    ConsensusTopicDefinition topicDefinition = 3; // Topic definition.
-    ConsensusTopicState topicState = 4; // Topic's consensus state.
+    ConsensusTopicDefinition topicDefinition = 3; // Topic definition, modified by createTopic/updateTopic/deleteTopic
+    ConsensusTopicState topicState = 4; // Topic's state as last modified by a submitMessage.
 }

@@ -30,12 +30,10 @@ public final class CreateTopicTransaction extends TransactionBuilder<CreateTopic
     }
 
     public CreateTopicTransaction setShardId(long shardId) {
-        builder.setShardID(ShardID.newBuilder().setShardNum(shardId));
         return this;
     }
 
     public CreateTopicTransaction setRealmId(long realmId) {
-        builder.setRealmID(RealmID.newBuilder().setRealmNum(realmId));
         return this;
     }
 
@@ -44,13 +42,8 @@ public final class CreateTopicTransaction extends TransactionBuilder<CreateTopic
         return this;
     }
 
-    public CreateTopicTransaction setCreationTime(Instant creationTime) {
-        builder.setCreationTime(TimestampHelper.timestampFrom(creationTime));
-        return this;
-    }
-
-    public CreateTopicTransaction setExpirationDuration(Duration expirationDuration) {
-        builder.setExpirationDuration(DurationHelper.durationFrom(expirationDuration));
+    public CreateTopicTransaction setValidStartTime(Instant creationTime) {
+        builder.setValidStartTime(TimestampHelper.timestampFrom(creationTime));
         return this;
     }
 

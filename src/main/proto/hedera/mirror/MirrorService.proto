@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package hedera.mirror;
+
+option go_package = "github.com/hashgraph/mirror/api/proto";
+option java_package = "com.hedera.mirror.api.proto.java";
+
+import "hedera/mirror/MirrorGetTransactions.proto";
+import "hedera/mirror/MirrorGetTopicMessages.proto";
+
+/*
+ * The Mirror Service provides the ability to query a stream of transactions for which this mirror node has history for.
+ */
+service MirrorService {
+
+    /*
+     * Provides a stream of messages for one or more topics along with their consensus timestamps. This API
+     * is a specialization of the getTransactions method specifically for use with the Hedera Consensus Service.
+     */
+    rpc getTopicMessages (MirrorGetTopicMessagesQuery) returns (stream MirrorGetTopicMessagesResponse);
+
+    /*
+     * Provides a stream of transactions along with its corresponding transaction record with various filtering options.
+     */
+    rpc getTransactions (MirrorGetTransactionsQuery) returns (stream MirrorGetTransactionsResponse);
+
+}
