@@ -59,6 +59,14 @@ public final class TransactionReceipt {
         return new TopicId(inner.getTopicIDOrBuilder());
     }
 
+    public long getTopicSequenceNumber() {
+        return inner.getTopicSequenceNumber();
+    }
+
+    public byte[] getTopicRunningHash() {
+        return inner.getTopicRunningHash().toByteArray();
+    }
+
     public com.hedera.hashgraph.sdk.proto.TransactionReceipt toProto() {
         return inner;
     }

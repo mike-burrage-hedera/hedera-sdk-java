@@ -19,4 +19,5 @@ message MirrorGetTopicMessagesResponse {
     .proto.Timestamp consensusTimestamp = 1; // The time at which the transaction reach consensus
     bytes message = 2; // The message body originally in the ConsensusSubmitMessageTransactionBody
     uint64 sequenceNumber = 3;
+    bytes runningHash = 4;
 }

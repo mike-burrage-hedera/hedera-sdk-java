@@ -29,6 +29,18 @@ public final class ExampleHelper {
         return Ed25519PrivateKey.fromString(Objects.requireNonNull(getEnv().get("OPERATOR_KEY")));
     }
 
+    public static String mirrorNodeHost() {
+        return Objects.requireNonNull(getEnv().get("MIRROR_HOST"));
+    }
+
+    public static int mirrorNodePort() {
+        return Integer.parseInt(Objects.requireNonNull(getEnv().get("MIRROR_PORT")));
+    }
+
+    public static String hcsTopicId() {
+        return Objects.requireNonNull(getEnv().get("HCS_TOPIC_ID"));
+    }
+
     public static Client createHederaClient() {
         // To connect to a network with more nodes, add additional entries to the network map
         var nodeAddress = Objects.requireNonNull(getEnv().get("NODE_ADDRESS"));

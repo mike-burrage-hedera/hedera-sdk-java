@@ -10,7 +10,7 @@ public final class GetTopicInfo {
 
     public static void main(String[] args) throws HederaException {
         var client = ExampleHelper.createHederaClient();
-        var topicId = TopicId.fromString("0.0.1001" /* YOUR_TOPIC_ID_HERE */);
+        var topicId = TopicId.fromString(ExampleHelper.hcsTopicId());
         var topicInfo = client.getTopicInfo(topicId);
         System.out.println("Topic " + topicId + ":");
         System.out.println("  sequence number: " + topicInfo.getSequenceNumber());
