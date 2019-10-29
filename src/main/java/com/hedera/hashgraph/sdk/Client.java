@@ -20,7 +20,7 @@ public final class Client {
     static final long DEFAULT_MAX_TXN_FEE = 100_000;
 
     // todo: transaction fees should be defaulted to whatever the transaction fee schedule is
-    private long maxTransactionFee = DEFAULT_MAX_TXN_FEE;
+    private long maxTransactionFee = 10_000_000;
 
     @Nullable
     private AccountId operatorId;

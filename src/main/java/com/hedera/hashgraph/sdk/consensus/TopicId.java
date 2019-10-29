@@ -29,8 +29,8 @@ public final class TopicId implements Entity {
         var newTopicId = TopicID.newBuilder();
 
         try {
-            newTopicId.setRealmNum(Integer.parseInt(rawNums.next()));
             newTopicId.setShardNum(Integer.parseInt(rawNums.next()));
+            newTopicId.setRealmNum(Integer.parseInt(rawNums.next()));
             newTopicId.setTopicNum(Integer.parseInt(rawNums.next()));
         } catch (Exception e) {
             throw new IllegalArgumentException("Invalid Id format, should be in format {shardNum}.{realmNum}.{topicNum}");
